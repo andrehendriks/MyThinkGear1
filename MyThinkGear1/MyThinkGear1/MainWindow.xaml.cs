@@ -39,14 +39,37 @@ namespace MyThinkGear1
             InitializeComponent();
         }
 
+
+        public void Main()
+        {
+            Connector connector = new Connector();
+            connector.DeviceConnected += new EventHandler(OnDeviceConnected);
+            connector.DeviceConnectFail += new EventHandler(OnDeviceFail);
+            connector.DeviceValidating += new EventHandler(OnDeviceValidating);
+            connector.Connect("COM31");
+            while (true)
+            {
+                ProgressBar progressBar = new ProgressBar();
+                progressBar.Value = 0;
+                Thread.Sleep(512);
+                progressBar.Value = 20;
+                Thread.Sleep(512);
+                progressBar.Value = 40;
+                Thread.Sleep(512);
+                progressBar.Value = 60;
+                Thread.Sleep(512);
+                progressBar.Value = 80;
+                Thread.Sleep(512);
+                progressBar.Value = 100;
+                Thread.Sleep(450000);
+            }
+        }
+    
         
 
         private void OnDeviceValidating(object sender, EventArgs e)
         {
 
-             Main main = true;
-                
-           
         }
 
         private void OnDeviceFail(object sender, EventArgs e)
@@ -95,7 +118,7 @@ namespace MyThinkGear1
                     //Console.WriteLine("Time:" + tgParser.ParsedData[i]["Time"]);
 
                     //A Poor Signal value of 0 indicates that your headset is fitting properly
-                    Console.WriteLine("Poor Signal:" + tgParser.ParsedData[i]["PoorSignal"]);
+                    //Console.WriteLine("Poor Signal:" + tgParser.ParsedData[i]["PoorSignal"]);
 
                     poorSig = (byte)tgParser.ParsedData[i]["PoorSignal"];
                 }
@@ -120,7 +143,7 @@ namespace MyThinkGear1
                 if (tgParser.ParsedData[i].ContainsKey("EegPowerDelta"))
                 {
 
-                    //Console.WriteLine("Delta: " + tgParser.ParsedData[i]["EegPowerDelta"]);
+                    Console.WriteLine("Delta: " + tgParser.ParsedData[i]["EegPowerDelta"]);
 
                 }
 
@@ -145,13 +168,13 @@ namespace MyThinkGear1
             connector.DeviceConnected += new EventHandler(OnDeviceConnected);
             connector.DeviceConnectFail += new EventHandler(OnDeviceFail);
             connector.DeviceValidating += new EventHandler(OnDeviceValidating);
-            connector.ConnectScan("COM31");
+            connector.Connect("COM31");
             Thread.Sleep(450000);
         }
 
         private void button_disconnect_Click(object sender, RoutedEventArgs e)
         {
-            Connector connector = new Connector();
+            
             connector.Close();
         }
     }
