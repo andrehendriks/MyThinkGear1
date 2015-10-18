@@ -39,22 +39,14 @@ namespace MyThinkGear1
             InitializeComponent();
         }
 
-        void Main()
-        {
-            Connector connector = new Connector();
-            connector.DeviceConnected += new EventHandler(OnDeviceConnected);
-            connector.DeviceConnectFail += new EventHandler(OnDeviceFail);
-            connector.DeviceValidating += new EventHandler(OnDeviceValidating);
-
-
-
-            Thread.Sleep(450000);
-        }
+        
 
         private void OnDeviceValidating(object sender, EventArgs e)
         {
-            MessageBox.Show("Device is Validating!:");
 
+             Main main = true;
+                
+           
         }
 
         private void OnDeviceFail(object sender, EventArgs e)
@@ -144,17 +136,23 @@ namespace MyThinkGear1
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Environment.Exit(1);
+            Environment.Exit(0);
+        }
+        String COM31 = null;
+        private void button_connect_Click(object sender, RoutedEventArgs e)
+        {
+            Connector connector = new Connector();
+            connector.DeviceConnected += new EventHandler(OnDeviceConnected);
+            connector.DeviceConnectFail += new EventHandler(OnDeviceFail);
+            connector.DeviceValidating += new EventHandler(OnDeviceValidating);
+            connector.ConnectScan("COM31");
+            Thread.Sleep(450000);
         }
 
         private void button_disconnect_Click(object sender, RoutedEventArgs e)
         {
+            Connector connector = new Connector();
             connector.Close();
-        }
-
-        private void button_connect_Click(object sender, RoutedEventArgs e)
-        {
-            connector.Connect("COM31");
         }
     }
 }
