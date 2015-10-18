@@ -23,6 +23,7 @@ using Jayrock.JsonML;
 using Jayrock.Reflection;
 using System.IO;
 using System.IO.Ports;
+using System.Threading;
 
 namespace MyThinkGear1
 {
@@ -31,7 +32,7 @@ namespace MyThinkGear1
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        Connector connector;
 
         public MainWindow()
         {
@@ -43,6 +44,17 @@ namespace MyThinkGear1
             Connector connector = new Connector();
             connector.DeviceConnected += new EventHandler(OnDeviceConnected);
             connector.DeviceConnectFail += new EventHandler(OnDeviceFail);
+            connector.DeviceValidating += new EventHandler(OnDeviceValidating);
+
+
+
+            Thread.Sleep(450000);
+        }
+
+        private void OnDeviceValidating(object sender, EventArgs e)
+        {
+            MessageBox.Show("Device is Validating!:");
+
         }
 
         private void OnDeviceFail(object sender, EventArgs e)
@@ -133,6 +145,16 @@ namespace MyThinkGear1
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Environment.Exit(1);
+        }
+
+        private void button_disconnect_Click(object sender, RoutedEventArgs e)
+        {
+            connector.Close();
+        }
+
+        private void button_connect_Click(object sender, RoutedEventArgs e)
+        {
+            connector.Connect("COM31");
         }
     }
 }
