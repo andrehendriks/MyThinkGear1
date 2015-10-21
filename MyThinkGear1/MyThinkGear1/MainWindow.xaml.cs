@@ -32,7 +32,7 @@ namespace MyThinkGear1
     /// </summary>
     public partial class MainWindow : Window
     {
-        Connector connector;
+       
 
         public MainWindow()
         {
@@ -69,7 +69,7 @@ namespace MyThinkGear1
 
         private void OnDeviceValidating(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Validating!:");
         }
 
         private void OnDeviceFail(object sender, EventArgs e)
@@ -174,7 +174,7 @@ namespace MyThinkGear1
 
         private void button_disconnect_Click(object sender, RoutedEventArgs e)
         {
-            
+            Connector connector = new Connector();
             connector.Close();
         }
     }

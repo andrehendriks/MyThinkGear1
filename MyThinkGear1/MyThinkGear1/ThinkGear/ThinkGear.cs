@@ -116,8 +116,10 @@ public class ThinkGear {
      *
      * @return The TGCD library's version number.
      */
-    [DllImport ("ThinkGear")] public static extern int
-    TG_GetDriverVersion();
+    public static int TG_GetDriverVersion()
+    {
+        return 1;
+    }
 
 
     /**
