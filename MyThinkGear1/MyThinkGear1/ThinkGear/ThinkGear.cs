@@ -141,8 +141,10 @@ public class ThinkGear {
      *
      * @return The ID handle of a newly-allocated ThinkGear Connection.
      */
-    [DllImport ("ThinkGear")] public static extern int
-    TG_GetNewConnectionId();
+    public static int TG_GetNewConnectionId()
+    {
+        return 1;
+    }
 
 
     /**
@@ -169,8 +171,10 @@ public class ThinkGear {
      *
      * @return 0 on success.
      */
-    [DllImport ("ThinkGear")] public static extern int
-    TG_SetStreamLog( int connectionId, string filename );
+    public static int TG_SetStreamLog( int connectionId, string filename )
+    {
+        return 1;
+    }
 
 
     /**
@@ -197,8 +201,10 @@ public class ThinkGear {
      *
      * @return 0 on success.
      */
-    [DllImport ("ThinkGear")] public static extern int
-    TG_SetDataLog( int connectionId, string filename );
+    public static int TG_SetDataLog( int connectionId, string filename )
+    {
+        return 1;
+    }
 
 
     /**
@@ -245,9 +251,11 @@ public class ThinkGear {
      *
      * @return 0 on success.
      */
-    [DllImport ("ThinkGear")] public static extern int
-    TG_Connect( int connectionId, string serialPortName, int serialBaudrate,
-                int serialDataFormat );
+    public static int TG_Connect( int connectionId, string serialPortName, int serialBaudrate,
+                int serialDataFormat )
+    {
+        return 1;
+    }
 
 
     /**
@@ -282,8 +290,10 @@ public class ThinkGear {
      * @return The number of Packets that were successfully read and parsed
      *         from the Connection.
      */
-    [DllImport ("ThinkGear")] public static extern int
-    TG_ReadPackets( int connectionId, int numPackets );
+    public static int TG_ReadPackets( int connectionId, int numPackets )
+    {
+        return 1;
+    }
 
 
     /**
@@ -306,8 +316,10 @@ public class ThinkGear {
      *
      * @return The most recent value of the requested @c dataType.
      */
-    [DllImport ("ThinkGear")] public static extern float
-    TG_GetValue( int connectionId, int dataType );
+    public static float TG_GetValue( int connectionId, int dataType )
+    {
+        return 1;
+    }
 
 
     /**
@@ -326,8 +338,10 @@ public class ThinkGear {
      * @return Non-zero if the @c dataType was updated by the most recent call
      * to TG_GetValue().  Returns 0 otherwise.
      */
-    [DllImport ("ThinkGear")] public static extern int
-    TG_GetValueStatus( int connectionId, int dataType );
+    public static int TG_GetValueStatus( int connectionId, int dataType )
+    {
+        return 1;
+    }
 
 
     /**
@@ -360,8 +374,10 @@ public class ThinkGear {
      *
      * @return 0 on success.
      */
-    [DllImport ("ThinkGear")] public static extern int
-    TG_SendByte( int connectionId, int b );
+    public static int TG_SendByte( int connectionId, int b )
+    {
+        return 1;
+    }
 
 
     /**
@@ -387,8 +403,10 @@ public class ThinkGear {
      *
      * @return 0 on success.
      */
-    [DllImport ("ThinkGear")] public static extern int
-    TG_SetBaudrate( int connectionId, int serialBaudrate );
+    public static int TG_SetBaudrate( int connectionId, int serialBaudrate )
+    {
+        return 1;
+    }
 
 
     /**
@@ -413,8 +431,10 @@ public class ThinkGear {
      *
      * @return 0 on success.
      */
-    [DllImport ("ThinkGear")] public static extern int
-    TG_SetDataFormat( int connectionId, int serialDataFormat );
+    public static int TG_SetDataFormat( int connectionId, int serialDataFormat )
+    {
+        return 1;
+    }
 
 
     /**
@@ -432,8 +452,10 @@ public class ThinkGear {
      * @param connectionId The ID of the ThinkGear Connection to disconnect, as
      *                     obtained from TG_GetNewConnectionId().
      */
-    [DllImport ("ThinkGear")] public static extern void
-    TG_Disconnect( int connectionId );
+    public static void TG_Disconnect( int connectionId )
+    {
+
+    }
 
 
     /**
@@ -448,7 +470,8 @@ public class ThinkGear {
      * @param connectionId The ID of the ThinkGear Connection to disconnect, as
      *                     obtained from TG_GetNewConnectionId().
      */
-    [DllImport ("ThinkGear")] public static extern void
-    TG_FreeConnection( int connectionId );
+   public static void TG_FreeConnection( int connectionId )
+    {
 
+    }
 }

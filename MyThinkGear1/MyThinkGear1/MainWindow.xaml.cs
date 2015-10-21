@@ -161,7 +161,7 @@ namespace MyThinkGear1
         {
             Environment.Exit(0);
         }
-        String COM31 = null;
+        
         private void button_connect_Click(object sender, RoutedEventArgs e)
         {
             Connector connector = new Connector();
