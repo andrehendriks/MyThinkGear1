@@ -27,19 +27,20 @@ using System.Threading;
 
 namespace MyThinkGear1
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-       
+        
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-
+        
         public void Main()
         {
             Connector connector = new Connector();
@@ -47,24 +48,29 @@ namespace MyThinkGear1
             connector.DeviceConnectFail += new EventHandler(OnDeviceFail);
             connector.DeviceValidating += new EventHandler(OnDeviceValidating);
             connector.Connect("COM31");
-            while (true)
-            {
-                ProgressBar progressBar = new ProgressBar();
-                progressBar.Value = 0;
-                Thread.Sleep(512);
-                progressBar.Value = 20;
-                Thread.Sleep(512);
-                progressBar.Value = 40;
-                Thread.Sleep(512);
-                progressBar.Value = 60;
-                Thread.Sleep(512);
-                progressBar.Value = 80;
-                Thread.Sleep(512);
-                progressBar.Value = 100;
-                Thread.Sleep(450000);
-            }
+            
+            progressBar.ValueChanged += ProgressBar_ValueChanged;            
+            
+            
+            Thread.Sleep(450000);
+            
         }
-    
+
+        private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            progressBar.Value = 0;
+            Thread.Sleep(512);
+            progressBar.Value = 20;
+            Thread.Sleep(512);
+            progressBar.Value = 40;
+            Thread.Sleep(512);
+            progressBar.Value = 60;
+            Thread.Sleep(512);
+            progressBar.Value = 80;
+            Thread.Sleep(512);
+            progressBar.Value = 100;
+        }
+
         
 
         private void OnDeviceValidating(object sender, EventArgs e)
@@ -85,18 +91,18 @@ namespace MyThinkGear1
             MessageBox.Show("Device found on: " + de.Device.PortName);
             de.Device.DataReceived += new EventHandler(OnDataReceived);
         }
-        private object poorSig;
+        
         private void OnDataReceived(object sender, EventArgs e)
         {
-            Device d = (Device)sender;
+            // Device d = (Device)sender;
 
             Device.DataEventArgs de = (Device.DataEventArgs)e;
-            DataRow[] tempDataRowArray = de.DataRowArray;
+           // DataRow[] tempDataRowArray = de.DataRowArray;
 
             TGParser tgParser = new TGParser();
             tgParser.Read(de.DataRowArray);
 
-
+            
 
             /* Loops through the newly parsed data of the connected headset*/
             // The comments below indicate and can be used to print out the different data outputs. 
@@ -110,17 +116,18 @@ namespace MyThinkGear1
                     //Console.WriteLine("Raw Value:" + tgParser.ParsedData[i]["Raw"]);
 
                 }
-
-                if (tgParser.ParsedData[i].ContainsKey("PoorSignal"))
+                
+                if (tgParser.ParsedData[i].ContainsKey(Properties.Resources.String3))
                 {
+                    //var poorSig = (byte)tgParser.ParsedData[i][Properties.Resources.String3];
 
                     //The following line prints the Time associated with the parsed data
                     //Console.WriteLine("Time:" + tgParser.ParsedData[i]["Time"]);
 
                     //A Poor Signal value of 0 indicates that your headset is fitting properly
-                    //Console.WriteLine("Poor Signal:" + tgParser.ParsedData[i]["PoorSignal"]);
+                    //Console.WriteLine(Properties.Resources.String4 + tgParser.ParsedData[i][Properties.Resources.String3]);
 
-                    poorSig = (byte)tgParser.ParsedData[i]["PoorSignal"];
+
                 }
 
 
@@ -168,14 +175,23 @@ namespace MyThinkGear1
             connector.DeviceConnected += new EventHandler(OnDeviceConnected);
             connector.DeviceConnectFail += new EventHandler(OnDeviceFail);
             connector.DeviceValidating += new EventHandler(OnDeviceValidating);
+            connector.DeviceDisconnected += new EventHandler(OnDeviceDisconnected);
             connector.Connect("COM31");
             Thread.Sleep(450000);
         }
 
+        private void OnDeviceDisconnected(object sender, EventArgs e)
+        {
+            MessageBox.Show("Disconnected! :");
+        }
+        
         private void button_disconnect_Click(object sender, RoutedEventArgs e)
         {
             Connector connector = new Connector();
             connector.Close();
+            
         }
+
+        
     }
 }

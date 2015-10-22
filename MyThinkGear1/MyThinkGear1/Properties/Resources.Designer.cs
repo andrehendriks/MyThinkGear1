@@ -77,5 +77,23 @@ namespace MyThinkGear1.Properties {
                 return ResourceManager.GetString("String2", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PoorSignal.
+        /// </summary>
+        internal static string String3 {
+            get {
+                return ResourceManager.GetString("String3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Poor Signal :.
+        /// </summary>
+        internal static string String4 {
+            get {
+                return ResourceManager.GetString("String4", resourceCulture);
+            }
+        }
     }
 }
