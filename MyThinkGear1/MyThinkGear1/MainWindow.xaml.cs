@@ -88,7 +88,7 @@ namespace MyThinkGear1
         private object poorSig;
         private void OnDataReceived(object sender, EventArgs e)
         {
-            //Device d = (Device)sender;
+            Device d = (Device)sender;
 
             Device.DataEventArgs de = (Device.DataEventArgs)e;
             DataRow[] tempDataRowArray = de.DataRowArray;
@@ -140,10 +140,10 @@ namespace MyThinkGear1
                 }
 
 
-                if (tgParser.ParsedData[i].ContainsKey("EegPowerDelta"))
+                if (tgParser.ParsedData[i].ContainsKey(Properties.Resources.String1))
                 {
 
-                    Console.WriteLine("Delta: " + tgParser.ParsedData[i]["EegPowerDelta"]);
+                    Console.WriteLine(Properties.Resources.String2 + tgParser.ParsedData[i][Properties.Resources.String1]);
 
                 }
 
